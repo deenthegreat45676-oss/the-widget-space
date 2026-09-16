@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#f6f4ef" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#f7f5f0" />
   <title>The Widget Space</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -13,32 +13,41 @@
 <body>
   <div class="app-shell">
     <aside class="sidebar">
-      <a class="brand" href="#home" aria-label="The Widget Space home"><span class="brand-mark">✦</span><span>The Widget<br /><b>Space</b></span></a>
+      <a class="brand" href="#home"><span class="brand-mark">✦</span><span>The Widget<br><b>Space</b></span></a>
       <nav class="primary-nav" aria-label="Main navigation">
-        <a class="nav-item active" href="#home" data-page="home"><span>⌂</span> Home</a>
+        <a class="nav-item" href="#home" data-page="home"><span>⌂</span> Home</a>
+        <a class="nav-item" href="#launcher" data-page="launcher"><span>▦</span> App launcher</a>
         <a class="nav-item" href="#notepad" data-page="notepad"><span>▤</span> The Notepad</a>
         <a class="nav-item" href="#settings" data-page="settings"><span>⚙</span> Settings</a>
       </nav>
-      <div class="sidebar-footer"><div class="live-dot"></div><span>Everything in its place.</span></div>
+      <div class="sidebar-footer"><i></i> Everything in its place.</div>
     </aside>
     <main class="main-content">
-      <header class="topbar"><div class="breadcrumb"><span>Workspace</span><span class="slash">/</span><strong id="page-label">Home</strong></div><div class="top-actions"><button class="icon-btn" id="focus-mode" title="Toggle focus mode">◐</button><button class="avatar">DW</button></div></header>
+      <header class="topbar"><div class="breadcrumb"><span>Workspace</span><b>/</b><strong id="page-label">Home</strong></div><div class="top-actions"><button class="icon-btn" id="focus-mode" title="Toggle focus mode">◐</button><span class="avatar">DW</span></div></header>
 
-      <section class="page home-page" id="home-page">
-        <div class="hero"><div><p class="eyebrow">WEDNESDAY, SEPTEMBER 16, 2026</p><h1>Good morning, <em>Deen.</em></h1><p class="subtitle">A little space for all the things that matter today.</p></div><button class="add-widget-btn" id="add-widget"><span>＋</span> Add widget</button></div>
+      <section class="page" id="home-page">
+        <div class="hero"><div><p class="eyebrow">WEDNESDAY, SEPTEMBER 16, 2026</p><h1>Good morning, <em>Deen.</em></h1><p class="subtitle">A little space for all the things that matter today.</p></div><button class="primary-btn" id="add-widget">＋ Add widget</button></div>
         <div class="dashboard" id="dashboard"></div>
         <div class="customize-hint"><span>✦</span><div><strong>Make it yours</strong><p>Drag widgets to rearrange your space, or add a new one from the library.</p></div><button class="text-btn" id="browse-widgets">Browse widgets →</button></div>
       </section>
 
-      <section class="page notepad-page hidden" id="notepad-page">
-        <div class="page-heading"><div><p class="eyebrow">YOUR CREATIVE DESK</p><h1>The <em>Notepad.</em></h1><p class="subtitle">A calm place to think, write, and make things happen.</p></div><div class="note-actions"><span class="save-status" id="save-status">Saved just now</span><button class="outline-btn" id="new-note">＋ New note</button></div></div>
-        <div class="notepad-layout"><aside class="notes-list"><div class="list-heading"><strong>My notes</strong><span id="note-count">1</span></div><div id="notes-list"></div></aside><article class="editor-card"><input class="note-title" id="note-title" value="A fresh start" aria-label="Note title" /><div class="format-toolbar"><button data-command="bold"><b>B</b></button><button data-command="italic"><i>I</i></button><button data-command="underline"><u>U</u></button><span></span><button data-command="formatBlock" data-value="h2">H2</button><button data-command="insertUnorderedList">☷</button><button data-command="justifyLeft">≡</button><button data-command="justifyCenter">≡</button></div><div class="editor" id="editor" contenteditable="true" spellcheck="true"><p>There is something special about beginning again.</p><p>Use this space for your thoughts, plans, and the words you want to remember. The best ideas often start as a single quiet sentence.</p><p><br /></p><p>— <i>Keep making room for good things.</i></p></div><div class="editor-footer"><span>⌘ S to save</span><span id="word-count">35 words</span></div></article></div>
+      <section class="page hidden" id="launcher-page">
+        <div class="page-heading"><div><p class="eyebrow">YOUR DIGITAL DESK</p><h1>The app <em>launcher.</em></h1><p class="subtitle">Your favorite places, one click away.</p></div><button class="primary-btn" id="add-app">＋ Add app</button></div>
+        <form class="google-search" id="google-search" action="https://www.google.com/search" method="get" target="_blank"><span>⌕</span><input name="q" id="google-query" placeholder="Search the web with Google..." autocomplete="off" /><button type="submit">Search</button></form>
+        <div class="launcher-toolbar"><strong>All apps</strong><span id="app-count"></span><input id="app-filter" type="search" placeholder="Filter apps" /></div>
+        <div class="app-grid" id="app-grid"></div>
       </section>
 
-      <section class="page settings-page hidden" id="settings-page"><div class="page-heading"><div><p class="eyebrow">YOUR WORKSPACE</p><h1>Settings.</h1><p class="subtitle">Make The Widget Space feel like home.</p></div></div><div class="settings-grid"><div class="settings-card"><div class="settings-card-heading"><div class="setting-icon">◒</div><div><h2>Appearance</h2><p>Choose how your space looks and feels.</p></div></div><label class="setting-row"><span><b>Theme</b><small>Pick a color mood for your workspace.</small></span><select id="theme-select"><option value="cream">Warm cream</option><option value="night">Midnight</option><option value="sage">Soft sage</option></select></label><label class="setting-row"><span><b>Compact widgets</b><small>Give your dashboard a little more breathing room.</small></span><input type="checkbox" class="toggle" id="compact-toggle" /></label></div><div class="settings-card"><div class="settings-card-heading"><div class="setting-icon">⌘</div><div><h2>Workspace</h2><p>Keep your daily tools close at hand.</p></div></div><label class="setting-row"><span><b>Start page</b><small>Where The Widget Space opens.</small></span><select><option>Home dashboard</option><option>The Notepad</option></select></label><label class="setting-row"><span><b>Show greeting</b><small>Display a warm welcome on your dashboard.</small></span><input type="checkbox" class="toggle" checked /></label></div><div class="settings-card danger-card"><div class="settings-card-heading"><div class="setting-icon">↺</div><div><h2>Reset space</h2><p>Restore the five default widgets.</p></div></div><button class="outline-btn" id="reset-widgets">Reset dashboard</button></div></div></section>
+      <section class="page hidden" id="notepad-page">
+        <div class="page-heading"><div><p class="eyebrow">YOUR CREATIVE DESK</p><h1>The <em>Notepad.</em></h1><p class="subtitle">A calm place to think, write, and make things happen.</p></div><div class="note-actions"><span class="save-status" id="save-status">Saved just now</span><button class="outline-btn" id="new-note">＋ New note</button></div></div>
+        <div class="notepad-layout"><aside class="notes-list"><div class="list-heading"><strong>My notes</strong><span id="note-count">1</span></div><div id="notes-list"></div></aside><article class="editor-card"><input class="note-title" id="note-title" value="A fresh start" aria-label="Note title" /><div class="format-toolbar"><button data-command="bold"><b>B</b></button><button data-command="italic"><i>I</i></button><button data-command="underline"><u>U</u></button><i></i><button data-command="formatBlock" data-value="h2">H2</button><button data-command="insertUnorderedList">☷</button><button data-command="justifyLeft">≡</button><button data-command="justifyCenter">≡</button></div><div class="editor" id="editor" contenteditable="true" spellcheck="true"><p>There is something special about beginning again.</p><p>Use this space for your thoughts, plans, and the words you want to remember.</p><p>— <i>Keep making room for good things.</i></p></div><div class="editor-footer"><span>⌘ S to save</span><span id="word-count">0 words</span></div></article></div>
+      </section>
+
+      <section class="page hidden" id="settings-page"><div class="page-heading"><div><p class="eyebrow">YOUR WORKSPACE</p><h1>Settings.</h1><p class="subtitle">Make The Widget Space feel like home.</p></div></div><div class="settings-grid"><div class="settings-card"><div class="settings-card-heading"><div class="setting-icon">◒</div><div><h2>Appearance</h2><p>Choose how your space looks and feels.</p></div></div><label class="setting-row"><span><b>Theme</b><small>Pick a color mood for your workspace.</small></span><select id="theme-select"><option value="cream">Warm cream</option><option value="night">Midnight</option><option value="sage">Soft sage</option></select></label><label class="setting-row"><span><b>Compact widgets</b><small>Give your dashboard more breathing room.</small></span><input type="checkbox" class="toggle" id="compact-toggle" /></label></div><div class="settings-card"><div class="settings-card-heading"><div class="setting-icon">⌘</div><div><h2>Workspace</h2><p>Keep your daily tools close at hand.</p></div></div><label class="setting-row"><span><b>Show greeting</b><small>Display a warm welcome on your dashboard.</small></span><input type="checkbox" class="toggle" id="greeting-toggle" checked /></label></div><div class="settings-card danger-card"><div class="settings-card-heading"><div class="setting-icon">↺</div><div><h2>Reset space</h2><p>Restore the five default widgets and 20 default apps.</p></div></div><button class="outline-btn" id="reset-space">Reset workspace</button></div></div></section>
     </main>
   </div>
   <div class="modal hidden" id="widget-modal"><div class="modal-card"><div class="modal-header"><div><p class="eyebrow">WIDGET LIBRARY</p><h2>Find your flow.</h2></div><button class="close-btn" id="close-modal">×</button></div><div class="widget-library" id="widget-library"></div></div></div>
+  <div class="modal hidden" id="app-modal"><form class="modal-card app-form" id="app-form"><div class="modal-header"><div><p class="eyebrow">APP LIBRARY</p><h2>Add an app.</h2><p class="modal-copy">Save any website as a shortcut in your launcher.</p></div><button class="close-btn" type="button" data-close="app-modal">×</button></div><label>App name<input id="app-name" required placeholder="My favorite site" /></label><label>Website URL<input id="app-url" type="url" required placeholder="https://example.com" /></label><label>Icon emoji<input id="app-icon" maxlength="2" value="🔗" /></label><div class="form-actions"><button type="button" class="outline-btn" data-close="app-modal">Cancel</button><button class="primary-btn" type="submit">Add app</button></div></form></div>
   <script src="app.js"></script>
 </body>
 </html>
